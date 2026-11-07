@@ -11,7 +11,7 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Noto Sans TC","PingFang TC",sans-serif;padding:16px;max-width:520px;margin-inline:auto}
 h1{font-size:18px;margin:4px 0 12px}
-.tabs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.25fr) minmax(0,.6fr);gap:6px;margin-bottom:10.5px}
+.tabs{display:grid;grid-template-columns:.85fr .85fr 1.15fr 1.4fr .65fr;gap:6px;margin-bottom:10.5px}
 .tabs button{flex:1;height:37.5px;padding:0 6.75px;line-height:1.2;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:10px;font-size:21px}
 .tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
 .out{background:var(--card);border:1px solid var(--line);border-radius:16px;text-align:center;padding:9px 10px 3.375px}
@@ -65,7 +65,7 @@ audio{color-scheme:light}
 @media (max-width:600px) and (orientation:portrait){
  html{padding:0;min-height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
  body{width:100%;max-width:520px;height:100dvh;min-height:0;padding: max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));display:flex;flex-direction:column;gap:7px;--key-h:clamp(32px,4.5dvh,40px)}
- .tabs{flex:0 0 42px;gap:5px;margin:0;grid-template-columns:1fr 1fr 1.18fr .64fr}
+ .tabs{flex:0 0 42px;gap:5px;margin:0;grid-template-columns:.85fr .85fr 1.15fr 1.4fr .65fr}
  .tabs button,.speed-control{height:42px;min-width:0;font-size:clamp(15px,4vw,18px);padding:0 3px;border-radius:9px}
  .speed-control{gap:2px}.speed-control select{font-size:16px;width:58px;max-width:64px;padding:0 1px;border:0}
  #p1{min-height:0}
@@ -100,7 +100,7 @@ audio{color-scheme:light}
 html{min-height:100%;padding:0}
 body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;padding:0}
 .flashcard-content{max-width:520px;margin:auto;padding:16px}
-.keyboard-pane{display:block;width:100%;height:auto;border:0;border-top:2px solid var(--line)}
+.keyboard-pane{display:block;width:100%;height:auto;border:0}
 @media(max-width:600px) and (orientation:portrait){
  .flashcard-content{padding:max(8px,env(safe-area-inset-top)) 10px 8px}
  .flashcard-content .tabs{margin-bottom:7px}
@@ -114,10 +114,15 @@ body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;paddi
 #word:focus-visible{outline:1px solid var(--ac);outline-offset:-2px;border-radius:8px}
 .keyboard-pane[hidden]{display:none}.keyboard-pane{max-width:520px;margin-inline:auto}
 #p1.no-match .tone-diagrams,#p1.no-match .playback-actions,#p1.no-match #homophones,#p1.no-match audio,#p1.no-match #mainSandhiSource{display:none}
+</style><style>
+@media (max-width:600px) and (orientation:portrait){
+ #autoOptions:not([hidden]){display:grid;gap:4px}
+ #autoOptions .row button{min-height:34px}
+}
 </style></head>
 <body>
 <section class="flashcard-pane" aria-label="白話字拼讀寫閃卡練習器"><div class="flashcard-content">
-<div class="tabs"><button id="t1" class="on">自己拼音</button><button id="tAuto">自動拼音</button><label class="speed-control">速度 <select id="autoSpeed" disabled><option value="3" selected>3 秒</option><option value="5">5 秒</option><option value="7">7 秒</option><option value="10">10 秒</option></select></label><button id="tDictionary">辭庫</button></div>
+<div class="tabs"><button id="t1" class="on">手動A</button><button id="tB">手動B</button><button id="tAuto">自動拼音</button><label class="speed-control">速度 <select id="autoSpeed" disabled><option value="3" selected>3 秒</option><option value="5">5 秒</option><option value="7">7 秒</option><option value="10">10 秒</option></select></label><button id="tDictionary">辭庫</button></div>
 
 
 <section id="dictionaryPanel" hidden aria-label="辭庫"><iframe id="dictionaryFrame" title="辭庫1999" allow="autoplay" style="display:block;width:100%;height:calc(100dvh - 96px);min-height:360px;border:0;border-radius:12px"></iframe></section>
@@ -137,6 +142,12 @@ body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;paddi
     <div class="sub" id="voiceStatus" role="status" aria-live="polite"></div>
     <div id="mainSandhiSource" class="sub" role="status" aria-live="polite" hidden></div>
   </div>
+  <section id="autoOptions" aria-label="拼音組合選項" hidden>
+  <div class="lab">子音</div><div class="row" id="ini"><button data-v="">∅</button><button data-v="p" class="on">p</button><button data-v="ph">ph</button><button data-v="b">b</button><button data-v="m">m</button><button data-v="t">t</button><button data-v="th">th</button><button data-v="n">n</button><button data-v="l">l</button><button data-v="k">k</button><button data-v="kh">kh</button><button data-v="g">g</button><button data-v="ng">ng</button><button data-v="h">h</button><button data-v="ch">ch</button><button data-v="chh">chh</button><button data-v="s">s</button><button data-v="j">j</button></div>
+  <div class="lab">母音</div><div class="row" id="vow"><button data-v="a" class="on">a</button><button data-v="e">e</button><button data-v="i">i</button><button data-v="o">o</button><button data-v="o͘">o͘</button><button data-v="u">u</button><button data-v="ai">ai</button><button data-v="au">au</button><button data-v="ia">ia</button><button data-v="io">io</button><button data-v="iu">iu</button><button data-v="oa">oa</button><button data-v="oe">oe</button><button data-v="o͘e">o͘e</button><button data-v="ui">ui</button><button data-v="iau">iau</button><button data-v="oai">oai</button></div>
+  <div class="lab">鼻母音 / 斷音</div><div class="row" id="cod"><button data-v="" class="on">∅</button><button data-v="ⁿ">ⁿ</button><button data-v="m">m</button><button data-v="n">n</button><button data-v="ng">ng</button><button data-v="p">p</button><button data-v="t">t</button><button data-v="k">k</button><button data-v="h">h</button></div>
+  <div class="lab">聲調(斷音韻尾才能選第 4、8 聲)</div><div class="row" id="ton"><button data-v="1" class="on">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4" disabled>4</button><button data-v="5">5</button><button data-v="7">7</button><button data-v="8" disabled>8</button></div>
+  </section>
 </div>
 
 <script>
@@ -298,20 +309,49 @@ function draw(){
  else if(!$('tAuto').classList.contains('on'))showStaticSandhiTone(s.t);
 }
 function render(){
-  if($('t1').classList.contains('on'))ensureManualCombination();
+  const bMode=$('tB').classList.contains('on');
+  if(bMode || $('t1').classList.contains('on'))ensureManualCombination();
   if(builtInEnding())s.c='';
   const stop=isStop();
   if(stop&&![4,8].includes(s.t))s.t=4;
   if(!stop&&[4,8].includes(s.t))s.t=1;
   if(s.c==='ⁿ'&&false)s.c='';
   $('word').value=spell().normalize('NFC');
+  if (!$('autoOptions').hidden) {
+    for (const [id, value] of [['ini',s.i],['vow',s.v],['cod',s.c],['ton',s.t]]) {
+      for (const button of $(id).children) {
+        const selected = button.dataset.v === String(value);
+        button.classList.toggle('on', selected);
+        button.setAttribute('aria-pressed', String(selected));
+        if (id === 'ton') button.disabled = stop !== [4,8].includes(Number(button.dataset.v));
+        if (id !== 'ton') {
+          const candidate={...s,[{ini:'i',vow:'v',cod:'c'}[id]]:button.dataset.v};
+          button.disabled=bMode ? !manualCombination(candidate.i,candidate.v,candidate.c)
+                                : id==='cod' && builtInEnding() && button.dataset.v!=='';
+          button.title=button.disabled && bMode ? '與目前選取內容搭配時，本程式辭典與教材尚無確認的拼音組合' : '';
+        }
+      }
+    }
+  }
   draw();
 }
+for (const [id,key] of [['ini','i'],['vow','v'],['cod','c'],['ton','t']]) {
+  $(id).addEventListener('click', event => {
+    const button = event.target.closest('button');
+    if (!button || button.disabled) return;
+    s[key] = key === 't' ? Number(button.dataset.v) : button.dataset.v;
+    render();
+  });
+}
 let manualText = null;
+let bSelection={...s};
 const show=n=>{
  if ($('t1').classList.contains('on')) manualText = $('word').value;
+ if ($('tB').classList.contains('on')) bSelection={...s};
+ $('tB').classList.toggle('on',n===2);
  $('word').readOnly=n!==1;
  $('keyboard').hidden=n!==1;
+ $('autoOptions').hidden=n!==3 && n!==2;
  $('p1').classList.remove('no-match');
  stopAuto();
  const dictionary=n===4,frame=$('dictionaryFrame');
@@ -322,9 +362,10 @@ const show=n=>{
  setBasePlayLabel(activeClip?'▶ 播放教育部真人錄音':'此組合尚無核對完成的錄音');
  if(dictionary&&!frame.getAttribute('src'))frame.src='dictionary/index.html';
  else if(frame.getAttribute('src'))frame.contentWindow.postMessage({type:'dictionary-active',active:dictionary},location.origin);
- if(n===3)startAuto();else if(!dictionary){if(manualText!==null){$('word').value=manualText;$('word').dispatchEvent(new Event('cardrestore'));}else render();}
+ if(n===2){s={...bSelection};render();}
+ else if(n===3)startAuto();else if(!dictionary){if(manualText!==null){$('word').value=manualText;$('word').dispatchEvent(new Event('cardrestore'));}else render();}
 };
-$('t1').onclick=()=>show(1);$('tAuto').onclick=()=>show(3);$('tDictionary').onclick=()=>show(4);
+$('tB').onclick=()=>show(2);$('t1').onclick=()=>show(1);$('tAuto').onclick=()=>show(3);$('tDictionary').onclick=()=>show(4);
 $('dictionaryFrame').onload=()=>{$('dictionaryFrame').contentWindow.postMessage({type:'dictionary-active',active:$('tDictionary').classList.contains('on')},location.origin);};
 render();
 </script>
@@ -343,7 +384,7 @@ let mainSandhiPairs=JSON.parse($('mainSandhiPairsData').textContent),mainSandhiC
 function updateSandhiControl(){
  const pair=mainSandhiPairs[voiceKey(spell())+'|'+s.t];
  mainSandhiClip=pair?.clip||null;
- const needsFirstWord=$('t1').classList.contains('on')&&!(mainSandhiClip?.kind==='context'&&mainSandhiClip.syllableIndex===0);
+ const needsFirstWord=($('t1').classList.contains('on')||$('tB').classList.contains('on'))&&!(mainSandhiClip?.kind==='context'&&mainSandhiClip.syllableIndex===0);
  sandhiButton.classList.toggle('has-recording',Boolean(activeClip||mainSandhiClip));
  sandhiButton.disabled=!mainSandhiClip||needsFirstWord;
  sandhiButton.style.color=needsFirstWord?'var(--mut)':'';
@@ -646,116 +687,53 @@ render();
 </div></section>
 <section id="keyboard" class="keyboard-pane" aria-label="白話字螢幕輸入法">
 <template shadowrootmode="open">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif:wght@400;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Charis+SIL:wght@400;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gentium+Plus:wght@400;700&display=swap">
 <style>
-/* Layout: one working editor up top (toolbar docked below it on phones), reference tables below in a two-column grid that stacks. */
-:host{
-  --bg:#f1f5f4; --surface:#ffffff; --fg:#14262a; --muted:#5a6f73; --line:#d3dfdd;
-  --accent:#0b6e78; --accent-fg:#ffffff; --mark:#c8431f; --field:#fbfdfc; --warn:#fdf0ea; --warn-line:#efc3b3;
-  --f-ui:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  --f-poj:"Charis SIL","Gentium Plus","Doulos SIL","Noto Serif","Times New Roman",serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme:dark){:host(:not([data-theme="light"])){
-  --bg:#0d1a1c; --surface:#142427; --fg:#e4efee; --muted:#93adb0; --line:#26393c;
-  --accent:#4cc3cf; --accent-fg:#06201f; --mark:#ff8a63; --field:#0f1e20; --warn:#2b1b15; --warn-line:#6b3a2a; color-scheme:dark}}
-:host([data-theme="dark"]){
-  --bg:#0d1a1c; --surface:#142427; --fg:#e4efee; --muted:#93adb0; --line:#26393c;
-  --accent:#4cc3cf; --accent-fg:#06201f; --mark:#ff8a63; --field:#0f1e20; --warn:#2b1b15; --warn-line:#6b3a2a; color-scheme:dark}
+:host{display:block;background:var(--bg);color:var(--fg);font:inherit;padding:0 6px 16px;line-height:1.55}
 *{box-sizing:border-box}
-:host{background:var(--bg);color:var(--fg);font-family:var(--f-ui);font-size:15px;line-height:1.65;
-  padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
-h1{font-size:clamp(26px,5vw,38px);line-height:1.2;margin:0;font-weight:700;text-wrap:balance}
-h1 .poj{font-family:var(--f-poj);font-weight:700;color:var(--accent);margin-left:.4em;font-size:.8em}
-h2{font-size:18px;margin:0 0 10px;text-wrap:balance}
-p{margin:0}
-.editor{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 0 var(--line)}
-.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.bar .sp{flex:1}
-.bar > button{font-size:18.2px}
-button{font:inherit;font-size:14px;color:var(--fg);background:var(--field);border:1px solid var(--line);border-radius:8px;min-height:40px;padding:0 12px;cursor:pointer}
-button:hover{border-color:var(--accent)}
-button:focus-visible,textarea:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-button.primary{background:var(--accent);color:var(--accent-fg);border-color:var(--accent);font-weight:500}
-textarea{width:100%;min-height:170px;resize:vertical;font-family:var(--f-poj);font-size:24px;line-height:1.6;color:var(--fg);
-  background:var(--field);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-textarea::placeholder{color:var(--muted);opacity:1}
-textarea:focus::placeholder{color:transparent}
-.keys{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
-.keys button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:4px 2px;min-height:54px;line-height:1.25}
-.keys .k{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
-.keys .g{font-family:var(--f-poj);font-size:20px}
-.spec{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
-.spec button{display:flex;flex-direction:column;align-items:center;min-height:54px;padding:4px 2px;line-height:1.25}
-.spec .k{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
-.spec .g{font-family:var(--f-poj);font-size:20px}
-.opts{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--muted);font-size:19.5px}
-.opts label{display:inline-flex;gap:6px;align-items:center;min-height:32px}
-.fix{display:flex;flex-direction:column;gap:8px;background:var(--warn);border:1px solid var(--warn-line);border-radius:10px;padding:10px 12px}
-.fix .row{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
-.fix .tk{font-family:var(--f-poj);font-size:20px;color:var(--mark);background:none;border:0;min-height:36px;padding:0 4px;text-decoration:underline wavy;text-underline-offset:4px}
-.fix .why{flex:1 1 200px;min-width:0;font-size:13px;color:var(--muted)}
-.fix .c{font-family:var(--f-poj);font-size:18px;min-height:36px;padding:0 10px}
-.fix .ig{font-size:12px;color:var(--muted);min-height:36px}
-.status{display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);min-height:20px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
-.scroll{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:14px}
-th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:baseline;white-space:nowrap}
-th{font-weight:500;color:var(--muted);font-size:12px;letter-spacing:.06em}
-td.c,.c{font-family:var(--f-mono);font-size:13px}
-td.o{font-family:var(--f-poj);font-size:19px}
-.m{color:var(--mark)}
-ol.rules{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px}
-.pill{font-family:var(--f-mono);font-size:12px;background:var(--field);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
-.note{color:var(--muted);font-size:13px;margin-top:10px}
-@media (max-width:720px){.grid{grid-template-columns:minmax(0,1fr)}.keys{grid-template-columns:repeat(4,minmax(0,1fr))}textarea{font-size:22px;min-height:136px;height:136px}}
-/* The complete keyboard stays visible on desktop and phones. */
-.keyboard{background:#f5faf8;border:1px solid #d3dfdd;border-radius:14px;padding:14px;color:#142e34;display:grid;gap:14px}
-.keyboard-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.keyboard-head h2{margin:0;font-size:20px}.keyboard-head span{font-size:13px;color:#415a5e}
-.keyboard .keys{grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
-.keyboard button{background:#fff;color:#142e34;border:1px solid #bfceca;box-shadow:0 4px 0 #88afa3;border-radius:10px;min-height:88px}
-.keyboard .keys button{flex-direction:column-reverse;gap:6px;padding:8px 2px}
-.keyboard .keys .k{font-size:22px;color:#142e34;font-weight:700}.keyboard .keys .g{font-size:39px}
-.keyboard .spec{--special-glyph-size:28px;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:4px}
-.keyboard .spec button{flex-direction:row;align-items:center;justify-content:center;gap:6px;min-height:calc(100px * 2 / 3);height:calc(100px * 2 / 3);white-space:nowrap;background:#fff9e9;border-color:#ddcf9f;box-shadow:0 4px 0 #bba35b}
-.keyboard .spec .g{font-family:var(--f-ui);font-size:var(--special-glyph-size);font-weight:700;line-height:1}
-.keyboard .spec button:not([data-insert="."]) .g{font-size:calc(var(--special-glyph-size) * 2);flex-shrink:0}
-.keyboard .spec button[data-insert=","] .g{transform:translateY(-0.22em)}.keyboard .spec .k{font-family:var(--f-ui);font-size:15px;color:#415457}
-.keyboard .spec button:nth-last-child(-n+2){background:#fff;border-color:#bfceca;box-shadow:0 4px 0 #88afa3}
-.keyboard button:active{transform:translateY(3px);box-shadow:none}
-@media(max-width:480px){.keyboard{padding:10px;gap:12px}.keyboard-head h2{font-size:18px}.keyboard-head span{font-size:12px}.keyboard .keys{gap:4px}.keyboard .keys button{min-height:76px}.keyboard .keys .k{font-size:20px}.keyboard .keys .g{font-size:34.5px}.keyboard .spec button{min-height:60px;height:60px;gap:4px}.keyboard .spec{--special-glyph-size:24px}.keyboard .spec .k{font-size:14px}}
-/* Compact vertical spacing below the title. */
-:host{padding-block:8px 20px}
-.wrap{gap:6px}
-.editor{padding:6px;gap:6px}
-.keyboard{padding:8px;gap:6px}
-.keyboard-head{gap:4px}
-.keyboard .spec{row-gap:6px}
-.opts{row-gap:2px}
-.bar{row-gap:4px}
-.grid{gap:10px}
-.card{padding:12px}
-h2{margin-bottom:6px}
-.note{margin-top:6px}
-ol.rules{gap:4px}
-@media(max-width:480px){.keyboard{padding:6px;gap:6px}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-
-:host{display:block}
-[hidden]{display:none!important} :host{padding:4px}
-.keyboard .keys button{min-height:55px;padding:2px;gap:0}
-.keyboard .keys .g{font-size:27px}.keyboard .keys .k{font-size:14px}
-.keyboard .spec button{min-height:40px;height:40px}
-.keyboard .spec{--special-glyph-size:16px}
-.keyboard .spec .k,.keyboard-head span{font-size:11px}
-.keyboard-head h2{font-size:14px}
-.grid{grid-template-columns:1fr}
+[hidden]{display:none!important}
+.wrap,.grid,.editor,.keyboard{display:grid;gap:8px;min-width:0}
+.editor,.card{padding:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;min-width:0}
+h2,p{margin:0}
+h2{font-size:16px;line-height:1.4}
+.keyboard-head,.opts,.bar,.fix .row{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.keyboard-head{justify-content:space-between}
+.keyboard-head span,.spec .k,.note,.status,.fix .why{font-size:13px;color:var(--mut)}
+.keys,.spec{display:grid;gap:5px}
+.keys{grid-template-columns:repeat(7,minmax(0,1fr))}
+.spec{grid-template-columns:repeat(3,minmax(0,1fr))}
+button{font:inherit;font-size:14px;min-width:0;min-height:38px;padding:4px 9px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:9px;cursor:pointer;touch-action:manipulation}
+button:active,.primary{background:var(--acbg);color:var(--ac);border-color:var(--ac)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+@media(hover:hover){button:hover{border-color:var(--ac);color:var(--ac)}}
+.keys button,.spec button{display:flex;align-items:center;justify-content:center;min-height:44px;padding:3px}
+.keys button{flex-direction:column-reverse}
+.keys .k{font:600 13px/1.4 system-ui;color:var(--mut)}
+.keys .g,.spec .g,td.o,.fix .tk,.fix .c{font-family:"Charis SIL","Gentium Plus","Times New Roman",serif}
+.keys .g{font-size:28px;line-height:1.35}
+.spec button{gap:6px}
+.spec .g{font-size:24px;line-height:1.2}
+.spec .k{font-size:12px}
+.opts{border-top:1px solid var(--line);padding-top:6px;gap:2px 12px}
+.opts label{display:inline-flex;align-items:center;gap:4px;min-height:32px;font-size:14px}
+.opts input{accent-color:var(--ac);margin:0}
+.bar{gap:5px}
+.status:empty{display:none}
+.card{font-size:15px;line-height:1.65}
+.card h2{color:var(--ac);margin-bottom:8px}
+.rules{margin:0;padding-left:1.65em}
+.rules li+li{margin-top:5px}
+.rules li::marker{color:var(--mut)}
+.note{border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
+.scroll{max-width:100%;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+th{background:var(--bg);color:var(--mut);font-weight:600}
+td.c{font-family:ui-monospace,monospace;font-size:13px}
+td.o{font-size:19px;color:var(--ac)}
+.fix{padding:8px;background:var(--acbg);border:1px solid var(--ac);border-radius:9px}
+.fix .tk{color:var(--ac);font-size:18px}
+.fix .why{flex:1 1 140px}
+@media(max-width:480px){.editor,.card{padding:9px}.keys,.spec{gap:4px}.bar button{min-height:40px}.keyboard-head span{font-size:12px}}
 </style>
 <div class="wrap">
 
