@@ -713,6 +713,8 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-off
 .spec button{gap:6px}
 .spec .g{font-size:24px;line-height:1.2}
 .spec .k{font-size:12px}
+.opts #clear-fixes{margin-left:auto}
+.status:empty{display:none}
 .opts{border-top:1px solid var(--line);padding-top:6px;gap:2px 12px}
 .opts label{display:inline-flex;align-items:center;gap:4px;min-height:32px;font-size:14px}
 .opts input{accent-color:var(--ac);margin:0}
@@ -743,22 +745,15 @@ td.o{font-size:19px;color:var(--ac)}
     <section class="keyboard" aria-label="聲調與特殊符號鍵盤">
       <div class="keyboard-head"><h2>② 聲調與特殊符號鍵盤</h2><span>先輸入字母，再按聲調</span></div>
       <div class="keys" id="tones" aria-label="聲調鍵"><button type="button" data-insert="1" aria-label="輸入 1"><span class="g">a</span><span class="k">1</span></button><button type="button" data-insert="2" aria-label="輸入 2"><span class="g">á</span><span class="k">2</span></button><button type="button" data-insert="3" aria-label="輸入 3"><span class="g">à</span><span class="k">3</span></button><button type="button" data-insert="4" aria-label="輸入 4"><span class="g">ah</span><span class="k">4</span></button><button type="button" data-insert="5" aria-label="輸入 5"><span class="g">â</span><span class="k">5</span></button><button type="button" data-insert="7" aria-label="輸入 7"><span class="g">ā</span><span class="k">7</span></button><button type="button" data-insert="8" aria-label="輸入 8"><span class="g">a̍h</span><span class="k">8</span></button></div>
-      <div class="spec" id="spec" aria-label="特殊符號與編輯鍵"><button type="button" data-insert="o͘" aria-label="輸入 o͘，打oo也可"><span class="k">打oo也可</span><span class="g">o͘</span></button><button type="button" data-insert="ⁿ" aria-label="輸入 ⁿ，打nn也可"><span class="k">打nn也可</span><span class="g">ⁿ</span></button><button type="button" data-insert="-" aria-label="輸入 連字號"><span class="g">-</span><span class="k">連字號</span></button><button type="button" data-insert="," aria-label="輸入 逗點"><span class="k">逗點</span><span class="g">,</span></button><button type="button" data-insert="." aria-label="輸入 句點"><span class="k">句點</span><span class="g">.</span></button><button type="button" data-insert="__backspace__" aria-label="輸入 退格"><span class="g">⌫</span><span class="k">退格</span></button></div>
+      <div class="spec" id="spec" aria-label="特殊符號與編輯鍵"><button type="button" data-insert="o͘" aria-label="輸入 o͘，打oo也可"><span class="k">打oo也可</span><span class="g">o͘</span></button><button type="button" data-insert="ⁿ" aria-label="輸入 ⁿ，打nn也可"><span class="k">打nn也可</span><span class="g">ⁿ</span></button><button type="button" data-insert="__backspace__" aria-label="退格"><span class="g">⌫</span><span class="k">退格</span></button></div>
     </section>
     <noscript><p role="alert">目前是附件預覽，按鍵無法執行。請開啟線上操作版，或將檔案放到可執行 JavaScript 的網頁主機。</p></noscript>
     <div class="opts">
       <label><input type="checkbox" id="on" checked> 自動轉換</label>
       <label><input type="checkbox" id="chk" checked> 糾錯提示</label>
-      <label><input type="checkbox" id="ts"> 也接受 ts / tsh(自動變 ch / chh)</label>
-    </div>
-    <div class="bar">
-      <button class="primary" id="copy" type="button">複製全部</button>
-      <button id="all" type="button">整段轉換(貼上的文字)</button>
-      <button id="clr" type="button">清空</button>
       <button id="clear-fixes" type="button">清空糾錯</button>
-      <span class="sp"></span>
-      <span class="status" id="st" role="status"></span>
     </div>
+    <span class="status" id="st" role="status"></span>
   </section>
 
   <div class="grid">
@@ -771,10 +766,10 @@ td.o{font-size:19px;color:var(--ac)}
         <li><b>點音 o͘：</b>打 oo 或點「o͘」。先打 p，再點 o͘ 得到 po͘；再點「7 ā」得到 pō͘。o͘ 右上的點是字母的一部分，不是聲調。</li>
         <li><b>鼻化 ⁿ：</b>母音後打 nn 或點「ⁿ」。例如 chhiann2 → chhiáⁿ（請）或點 chhia(ⁿ)+(2 á) → chhiáⁿ（請）。ⁿ 表示鼻化，不等於韻尾 n、m、ng。</li>
         <li><b>第 1、4 聲不加調號：</b>si1 → si（詩）或點si(1 a) ,sik4  → sik（色）或點sik(4 ah)  → sik（色）。數字可用來確認調類；第 4、8 聲須有 p、t、k、h 斷音韻尾。</li>
-        <li><b>連字與分詞：</b>同一詞內用「-」連接音節，詞與詞之間用空格；輕聲標記「--」可用一般鍵盤輸入；畫面另提供逗點「,」與句點「.」按鍵。用「退格」刪除游標前一個字形。</li>
+        <li><b>連字與分詞：</b>同一詞內用「-」連接音節，詞與詞之間用空格；輕聲標記「--」可用一般鍵盤輸入。</li>
         <li><b>書寫本調：</b>一般白話字寫本調，朗讀時依詞句變調；本輸入法不會自動把整句改寫成變調後的聲調。</li>
       </ol>
-      <p class="note">實體鍵盤輸入數字時須開啟「自動轉換」；畫面聲調鍵可直接使用。貼上的數字式白話字，可按「整段轉換」。</p>
+      <p class="note">實體鍵盤輸入數字時須開啟「自動轉換」；畫面聲調鍵可直接使用。</p>
     </section>
 
     <section class="card">
@@ -1027,9 +1022,9 @@ function renderFix(issue, cand, opts) {
   return out;
 }
 var ed = document.getElementById('word'), st = keyboard.getElementById('st'), fixEl = keyboard.getElementById('fix');
-var on = keyboard.getElementById('on'), ts = keyboard.getElementById('ts'), chk = keyboard.getElementById('chk');
+var on = keyboard.getElementById('on'), chk = keyboard.getElementById('chk');
 var entered = new Map(), ignored = new Set(), timer, undoState = null;
-function opts() { return { ts: ts.checked }; }
+function opts() { return { ts: false }; }
 function say(t, undo) {
   clearTimeout(timer); st.textContent = t;
   if (undo) {
@@ -1226,7 +1221,7 @@ ed.addEventListener('paste', function () { setTimeout(function () {
   if (on.checked) { var r = pojText(ed.value, opts()); if (r !== ed.value) { ed.value = r; ed.setSelectionRange(r.length, r.length); } }
   refresh();
 }, 0); });
-[on, ts, chk].forEach(function (x) { x.addEventListener('change', refresh); });
+[on, chk].forEach(function (x) { x.addEventListener('change', refresh); });
 keyboard.querySelectorAll('[data-insert]').forEach(function (b) {
   b.addEventListener('mousedown', function (e) { e.preventDefault(); });
   b.addEventListener('pointerdown', function (e) {
@@ -1235,7 +1230,6 @@ keyboard.querySelectorAll('[data-insert]').forEach(function (b) {
   });
   b.addEventListener('click', function () { insert(b.getAttribute('data-insert')); });
 });
-keyboard.getElementById('all').addEventListener('click', function () { convertAll(); say('已轉換'); refresh(); });
 // Dismiss all displayed correction messages without changing the editor or settings.
 var clearFixesButton = keyboard.getElementById('clear-fixes');
 clearFixesButton.addEventListener('mousedown', function (e) { e.preventDefault(); });
@@ -1247,13 +1241,6 @@ clearFixesButton.addEventListener('click', function () {
   fixEl.textContent = '';
   fixEl.hidden = true;
 });
-keyboard.getElementById('clr').addEventListener('click', function () { ed.value = ''; entered.clear(); ignored.clear(); ed.focus(); ed.setSelectionRange(0, 0); rememberRange(); refresh(); });
-keyboard.getElementById('copy').addEventListener('click', function () {
-  var t = ed.value;
-  function fb() { ed.focus(); ed.select(); var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} say(ok ? '已複製' : '已全選,請按複製'); }
-  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function () { say('已複製'); }, fb); else fb();
-});
-
 ed.setSelectionRange(ed.value.length, ed.value.length);
 rememberRange();
 
