@@ -11,7 +11,7 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Noto Sans TC","PingFang TC",sans-serif;padding:16px;max-width:520px;margin-inline:auto}
 h1{font-size:18px;margin:4px 0 12px}
-.tabs{display:grid;grid-template-columns:.85fr .85fr 1.15fr 1.4fr .65fr;gap:6px;margin-bottom:10.5px}
+.tabs{display:grid;grid-template-columns:minmax(0,.99825fr) minmax(0,.99825fr) minmax(0,1.012fr) minmax(0,1.11325fr) minmax(0,.77825fr);gap:6px;margin-bottom:10.5px}
 .tabs button{flex:1;height:37.5px;padding:0 6.75px;line-height:1.2;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:10px;font-size:21px}
 .tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
 .out{background:var(--card);border:1px solid var(--line);border-radius:16px;text-align:center;padding:9px 10px 3.375px}
@@ -21,10 +21,10 @@ h1{font-size:18px;margin:4px 0 12px}
 .tone-diagrams svg{display:block;width:100%;height:73px;margin:0;transform-box:border-box;transform:translateX(-16.6666666667%)}
 #sandhiSvg{position:absolute;left:0;top:0;transform:translateX(16.6666666667%)}
 .base-tone-label{font-size:21px}
-.lab{font-size:12px;color:var(--mut);margin:14px 0 6px}
+.lab{font-size:18px;color:var(--mut);margin:14px 0 6px}
 .out + .lab{margin-top:5.25px}
 .row{display:flex;flex-wrap:wrap;gap:6px}
-.row button{padding:7px 11px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:9px;font-size:16px;font-family:"Charis SIL","Gentium Plus","Noto Serif",serif}
+.row button{padding:7px 11px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:9px;font-size:24px;font-family:"Charis SIL","Gentium Plus","Noto Serif",serif}
 .row button.on{background:var(--acbg);border-color:var(--ac);color:var(--ac);font-weight:600}
 .row button:disabled{opacity:.3}
 #ini button:disabled,#vow button:disabled,#cod button:disabled{color:#a4a4a4;opacity:.4;cursor:not-allowed;border-color:var(--bd);background:transparent;box-shadow:none}
@@ -65,7 +65,7 @@ audio{color-scheme:light}
 @media (max-width:600px) and (orientation:portrait){
  html{padding:0;min-height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
  body{width:100%;max-width:520px;height:100dvh;min-height:0;padding: max(8px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));display:flex;flex-direction:column;gap:7px;--key-h:clamp(32px,4.5dvh,40px)}
- .tabs{flex:0 0 42px;gap:5px;margin:0;grid-template-columns:.85fr .85fr 1.15fr 1.4fr .65fr}
+ .tabs{flex:0 0 42px;gap:5px;margin:0;grid-template-columns:minmax(0,.99825fr) minmax(0,.99825fr) minmax(0,1.012fr) minmax(0,1.11325fr) minmax(0,.77825fr)}
  .tabs button,.speed-control{height:42px;min-width:0;font-size:clamp(15px,4vw,18px);padding:0 3px;border-radius:9px}
  .speed-control{gap:2px}.speed-control select{font-size:16px;width:58px;max-width:64px;padding:0 1px;border:0}
  #p1{min-height:0}
@@ -83,14 +83,14 @@ audio{color-scheme:light}
  .homophone-heading{font-size:13px;min-height:25px}
  .homophone-list{gap:3px}.homophone-list button{font-size:15px;min-width:30px;min-height:25px;padding:3px 7px}
  .sub,#voiceStatus,#mainSandhiSource{font-size:11px;line-height:1.35;margin-top:3px;overflow-wrap:anywhere}
- .lab,.out+.lab{font-size:12px;line-height:19px;margin:0;align-self:end}
+ .lab,.out+.lab{font-size:18px;line-height:19px;margin:0;align-self:end}
  .row{display:grid;gap:4px;min-width:0;min-height:0;grid-template-columns:repeat(9,minmax(0,1fr));align-content:stretch}
- .row button{height:100%;min-width:0;min-height:0;padding:0 1px;line-height:1.15;font-size:clamp(21px,5.6vw,26px);font-family:"Charis SIL","Gentium Plus","Times New Roman",serif;border-radius:7px;touch-action:manipulation}
+ .row button{height:100%;min-width:0;min-height:0;padding:0 1px;line-height:1.15;font-size:clamp(31.5px,8.4vw,39px);font-family:"Charis SIL","Gentium Plus","Times New Roman",serif;border-radius:7px;touch-action:manipulation}
  #ini,#vow{grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:4px}
  #ini button,#vow button{font-size:clamp(21px,5.6vw,25px);font-weight:600;letter-spacing:0}
  #ton{grid-template-columns:repeat(7,minmax(0,1fr))}
- #dictionaryPanel{flex:1;min-height:0}#dictionaryPanel[hidden]{display:none}
- #dictionaryFrame{height:100%!important;min-height:0!important}
+ #dictionaryPanel{min-height:0}#dictionaryPanel[hidden]{display:none}
+ #dictionaryFrame{height:calc(100dvh - 60px);min-height:360px}
 }
 @media (max-width:600px) and (orientation:portrait) and (max-height:680px){
  body{height:auto;min-height:100dvh}#p1{flex:none;min-height:0}
@@ -105,6 +105,10 @@ body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;paddi
  .flashcard-content{padding:max(8px,env(safe-area-inset-top)) 10px 8px}
  .flashcard-content .tabs{margin-bottom:7px}
 }
+
+.consonant-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.editor-actions{display:flex;gap:6px}
+.editor-actions button{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:9px;min-height:36px;padding:3px 10px;touch-action:manipulation}
 </style>
 <style>
 .flashcard-content{padding:4px 6px}
@@ -117,7 +121,7 @@ body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;paddi
 </style><style>
 @media (max-width:600px) and (orientation:portrait){
  #autoOptions:not([hidden]){display:grid;gap:4px}
- #autoOptions .row button{min-height:34px}
+ #autoOptions .row button{min-height:46px}
 }
 </style></head>
 <body>
@@ -125,7 +129,7 @@ body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;paddi
 <div class="tabs"><button id="t1" class="on">手動A</button><button id="tB">手動B</button><button id="tAuto">自動拼音</button><label class="speed-control">速度 <select id="autoSpeed" disabled><option value="3" selected>3 秒</option><option value="5">5 秒</option><option value="7">7 秒</option><option value="10">10 秒</option></select></label><button id="tDictionary">辭庫</button></div>
 
 
-<section id="dictionaryPanel" hidden aria-label="辭庫"><iframe id="dictionaryFrame" title="辭庫1999" allow="autoplay" style="display:block;width:100%;height:calc(100dvh - 96px);min-height:360px;border:0;border-radius:12px"></iframe></section>
+<section id="dictionaryPanel" hidden aria-label="辭庫"><iframe id="dictionaryFrame" title="辭庫1999" allow="autoplay" style="display:block;width:100%;height:calc(100dvh - 60px);min-height:360px;border:0;border-radius:12px"></iframe></section>
 <div id="p1">
   <div class="out">
     <div class="word-row"><input class="word" id="word" lang="nan-Latn" aria-label="白話字輸入框" placeholder="輸入白話字" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"><div class="word source-hanzi" id="sourceHanzi" aria-label="例音中文">巴</div></div>
@@ -143,7 +147,7 @@ body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;paddi
     <div id="mainSandhiSource" class="sub" role="status" aria-live="polite" hidden></div>
   </div>
   <section id="autoOptions" aria-label="拼音組合選項" hidden>
-  <div class="lab">子音</div><div class="row" id="ini"><button data-v="">∅</button><button data-v="p" class="on">p</button><button data-v="ph">ph</button><button data-v="b">b</button><button data-v="m">m</button><button data-v="t">t</button><button data-v="th">th</button><button data-v="n">n</button><button data-v="l">l</button><button data-v="k">k</button><button data-v="kh">kh</button><button data-v="g">g</button><button data-v="ng">ng</button><button data-v="h">h</button><button data-v="ch">ch</button><button data-v="chh">chh</button><button data-v="s">s</button><button data-v="j">j</button></div>
+  <div class="lab consonant-heading"><span>子音</span><span class="editor-actions"><button type="button" data-editor-action="__backspace__" aria-label="退格，刪除游標前的字元">⌫ 退格</button><button type="button" data-editor-action="__clear__" aria-label="清除輸入欄位全部內容">清除</button></span></div><div class="row" id="ini"><button data-v="">∅</button><button data-v="p" class="on">p</button><button data-v="ph">ph</button><button data-v="b">b</button><button data-v="m">m</button><button data-v="t">t</button><button data-v="th">th</button><button data-v="n">n</button><button data-v="l">l</button><button data-v="k">k</button><button data-v="kh">kh</button><button data-v="g">g</button><button data-v="ng">ng</button><button data-v="h">h</button><button data-v="ch">ch</button><button data-v="chh">chh</button><button data-v="s">s</button><button data-v="j">j</button></div>
   <div class="lab">母音</div><div class="row" id="vow"><button data-v="a" class="on">a</button><button data-v="e">e</button><button data-v="i">i</button><button data-v="o">o</button><button data-v="o͘">o͘</button><button data-v="u">u</button><button data-v="ai">ai</button><button data-v="au">au</button><button data-v="ia">ia</button><button data-v="io">io</button><button data-v="iu">iu</button><button data-v="oa">oa</button><button data-v="oe">oe</button><button data-v="o͘e">o͘e</button><button data-v="ui">ui</button><button data-v="iau">iau</button><button data-v="oai">oai</button></div>
   <div class="lab">鼻母音 / 斷音</div><div class="row" id="cod"><button data-v="" class="on">∅</button><button data-v="ⁿ">ⁿ</button><button data-v="m">m</button><button data-v="n">n</button><button data-v="ng">ng</button><button data-v="p">p</button><button data-v="t">t</button><button data-v="k">k</button><button data-v="h">h</button></div>
   <div class="lab">聲調(斷音韻尾才能選第 4、8 聲)</div><div class="row" id="ton"><button data-v="1" class="on">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4" disabled>4</button><button data-v="5">5</button><button data-v="7">7</button><button data-v="8" disabled>8</button></div>
@@ -713,7 +717,6 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-off
 .spec button{gap:6px}
 .spec .g{font-size:24px;line-height:1.2}
 .spec .k{font-size:12px}
-.opts #clear-fixes{margin-left:auto}
 .status:empty{display:none}
 .opts{border-top:1px solid var(--line);padding-top:6px;gap:2px 12px}
 .opts label{display:inline-flex;align-items:center;gap:4px;min-height:32px;font-size:14px}
@@ -741,18 +744,12 @@ td.o{font-size:19px;color:var(--ac)}
 
 
   <section class="editor" aria-label="輸入區">
-    <div class="fix" id="fix" hidden aria-live="polite"></div>
     <section class="keyboard" aria-label="聲調與特殊符號鍵盤">
-      <div class="keyboard-head"><h2>② 聲調與特殊符號鍵盤</h2><span>先輸入字母，再按聲調</span></div>
       <div class="keys" id="tones" aria-label="聲調鍵"><button type="button" data-insert="1" aria-label="輸入 1"><span class="g">a</span><span class="k">1</span></button><button type="button" data-insert="2" aria-label="輸入 2"><span class="g">á</span><span class="k">2</span></button><button type="button" data-insert="3" aria-label="輸入 3"><span class="g">à</span><span class="k">3</span></button><button type="button" data-insert="4" aria-label="輸入 4"><span class="g">ah</span><span class="k">4</span></button><button type="button" data-insert="5" aria-label="輸入 5"><span class="g">â</span><span class="k">5</span></button><button type="button" data-insert="7" aria-label="輸入 7"><span class="g">ā</span><span class="k">7</span></button><button type="button" data-insert="8" aria-label="輸入 8"><span class="g">a̍h</span><span class="k">8</span></button></div>
-      <div class="spec" id="spec" aria-label="特殊符號與編輯鍵"><button type="button" data-insert="o͘" aria-label="輸入 o͘，打oo也可"><span class="k">打oo也可</span><span class="g">o͘</span></button><button type="button" data-insert="ⁿ" aria-label="輸入 ⁿ，打nn也可"><span class="k">打nn也可</span><span class="g">ⁿ</span></button><button type="button" data-insert="__backspace__" aria-label="退格"><span class="g">⌫</span><span class="k">退格</span></button></div>
+      <div class="spec" id="spec" aria-label="特殊符號與編輯鍵"><button type="button" data-insert="o͘" aria-label="輸入 o͘，打oo也可"><span class="k">打oo也可</span><span class="g">o͘</span></button><button type="button" data-insert="ⁿ" aria-label="輸入 ⁿ，打nn也可"><span class="k">打nn也可</span><span class="g">ⁿ</span></button><button type="button" data-insert="__clear__" aria-label="清除全部輸入內容"><span class="g">清除</span></button></div>
     </section>
     <noscript><p role="alert">目前是附件預覽，按鍵無法執行。請開啟線上操作版，或將檔案放到可執行 JavaScript 的網頁主機。</p></noscript>
-    <div class="opts">
-      <label><input type="checkbox" id="on" checked> 自動轉換</label>
-      <label><input type="checkbox" id="chk" checked> 糾錯提示</label>
-      <button id="clear-fixes" type="button">清空糾錯</button>
-    </div>
+    <div class="keyboard-head"><h2>② 聲調與特殊符號鍵盤</h2><span>先輸入字母，再按聲調</span></div>
     <span class="status" id="st" role="status"></span>
   </section>
 
@@ -769,20 +766,9 @@ td.o{font-size:19px;color:var(--ac)}
         <li><b>連字與分詞：</b>同一詞內用「-」連接音節，詞與詞之間用空格；輕聲標記「--」可用一般鍵盤輸入。</li>
         <li><b>書寫本調：</b>一般白話字寫本調，朗讀時依詞句變調；本輸入法不會自動把整句改寫成變調後的聲調。</li>
       </ol>
-      <p class="note">實體鍵盤輸入數字時須開啟「自動轉換」；畫面聲調鍵可直接使用。</p>
+      <p class="note">輸入聲調數字會自動轉換；畫面聲調鍵可直接使用。</p>
     </section>
 
-    <section class="card">
-      <h2>糾錯怎麼運作</h2>
-      <ol class="rules">
-        <li>你開始打下一個音節(空格、連字號或標點之後),前面的音節就會被檢查。</li>
-        <li>最後一個音節,也就是游標所在或文字結尾的那個,不檢查,因為還沒打完。</li>
-        <li>只有一種改法時,自動改好,並顯示「復原」。</li>
-        <li>有好幾種改法時,列出選項讓你點。</li>
-        <li>常見錯誤:拼法不存在(xa1、hou7)、聲調配錯結尾(ma4、tak3)、不存在的第 6 聲。</li>
-      </ol>
-      <p class="note">檢查只針對打過聲調數字或帶調號的音節。混寫其他語言時,可點選&quot;清空糾錯&quot;刪除「糾錯提示」。</p>
-    </section>
 
     <section class="card">
       <h2>範例</h2>
@@ -983,7 +969,7 @@ function decodeToken(tok, typedTone) {
     else if (c === '͘') { if (!a.length || a[a.length - 1].toLowerCase() !== 'o') return null; a[a.length - 1] += a[a.length - 1] === 'O' ? 'o' : 'o'; special = true; }
     else if (c === '̤') { var p = a[a.length - 1] || ''; if (p.toLowerCase() === 'u' || p.toLowerCase() === 'o') { a[a.length - 1] = p + 'r'; special = true; } else return null; }
     else if (c === 'ⁿ') { a.push('nn'); special = true; }
-    else if (c === '6' && i === d.length - 1) tone = '6';
+    else if (/[1-9]/.test(c) && i === d.length - 1) tone = c;
     else return null;
   }
   if (!a.length) return null;
@@ -991,56 +977,20 @@ function decodeToken(tok, typedTone) {
   return { ascii: ascii, tone: tone, marked: !!tone || special, special: special };
 }
 function tokenize(text) {
-  var re = /[A-Za-zÀ-ɏḀ-ỿ̀-ͯⁿ]+(?:6(?!\d))?/g, m, out = [];
+  var re = /[A-Za-zÀ-ɏḀ-ỿ̀-ͯⁿ]+(?:[1-9](?!\d))?/g, m, out = [];
   while ((m = re.exec(text))) out.push({ text: m[0], start: m.index, end: m.index + m[0].length });
   return out;
 }
-function checkToken(tok, entered) {
-  var d = decodeToken(tok.text);
-  if (!d) return null;
-  var typed = entered && entered.get(tok.text);
-  if (!d.marked && typed === undefined) return null;
-  var tone = d.tone || typed || (isStop(d.ascii.toLowerCase()) ? '4' : '1');
-  var v = validate(d.ascii, tone);
-  if (v.ok) return null;
-  return { token: tok, ascii: d.ascii, tone: tone, why: v.why, cands: candidates(d.ascii, tone, 6) };
-}
-function scan(text, caret, entered) {
-  var toks = tokenize(text), issues = [];
-  toks.forEach(function (t) {
-    if (caret >= t.start && caret <= t.end) return;
-    if (t.end === text.length) return;
-    var r = checkToken(t, entered);
-    if (r) issues.push(r);
-  });
-  return issues;
-}
-function renderFix(issue, cand, opts) {
-  var out = pojSyllable(cand.ascii, cand.tone, { ts: false });
-  var first = issue.token.text.replace(/[^A-Za-zÀ-ɏḀ-ỿ]/, function (x) { return x; }).charAt(0);
-  if (first && first !== first.toLowerCase() && first === first.toUpperCase()) out = out.charAt(0).toUpperCase() + out.slice(1);
-  return out;
-}
-var ed = document.getElementById('word'), st = keyboard.getElementById('st'), fixEl = keyboard.getElementById('fix');
-var on = keyboard.getElementById('on'), chk = keyboard.getElementById('chk');
-var entered = new Map(), ignored = new Set(), timer, undoState = null;
+var ed = document.getElementById('word'), st = keyboard.getElementById('st');
+var entered = new Map(), timer;
 function opts() { return { ts: false }; }
-function say(t, undo) {
-  clearTimeout(timer); st.textContent = t;
-  if (undo) {
-    var b = document.createElement('button'); b.type = 'button'; b.textContent = '復原';
-    b.addEventListener('mousedown', function (e) { e.preventDefault(); });
-    b.addEventListener('click', function () {
-      ed.value = undo.value; ed.focus(); ed.setSelectionRange(undo.caret, undo.caret);
-      ignored.add(undo.token); st.textContent = ''; refresh();
-    });
-    st.appendChild(b);
-  }
-  timer = setTimeout(function () { st.textContent = ''; }, undo ? 6000 : 2200);
+function say(t) {
+  clearTimeout(timer);
+  st.textContent = t;
+  timer = setTimeout(function () { st.textContent = ''; }, 2200);
 }
 function record(out, digit) { if (digit === '1' || digit === '4') entered.set(out, digit); }
 function convertAtCaret() {
-  if (!on.checked) return;
   var c = ed.selectionStart, v = ed.value;
   if (/\d/.test(v.charAt(c))) return;
   var m = /([A-Za-z\u00C0-\u024F\u1E00-\u1EFF\u0300-\u036F\u207F]+)([1-5789])$/.exec(v.slice(0, c));
@@ -1056,7 +1006,6 @@ function convertAtCaret() {
 }
 var VOWEL_BEFORE_NN = /[aeiouAEIOU\u00C0-\u017F\u1E00-\u1EFF\u0300-\u036F]$/;
 function liveSpecial() {
-  if (!on.checked) return;
   var c = ed.selectionStart, v = ed.value, b = v.slice(0, c), m, rep = null, n = 0;
   if ((m = /([Oo])[Oo]$/.exec(b))) { rep = m[1] + '\u0358'; n = 2; }
   else if (/[Nn][Nn]$/.test(b) && VOWEL_BEFORE_NN.test(b.slice(0, -2))) { rep = '\u207F'; n = 2; }
@@ -1066,33 +1015,15 @@ function liveSpecial() {
   var p = c - n + rep.length;
   ed.setSelectionRange(p, p);
 }
-function convertAll() {
-  ed.value = pojText(ed.value, opts());
-}
-/* 糾錯 */
-function applyCand(issue, cand, auto) {
-  var out = renderFix(issue, cand);
-  var v = ed.value, caret = ed.selectionStart, t = issue.token;
-  undoState = { value: v, caret: caret, token: out };
-  ed.value = v.slice(0, t.start) + out + v.slice(t.end);
-  var np = caret >= t.end ? caret + out.length - (t.end - t.start) : caret;
-  ed.setSelectionRange(np, np);
-  record(out, cand.tone);
-  if (auto) say('已把 ' + t.text + ' 改成 ' + out, { value: v, caret: caret, token: t.text });
-}
-function currentIssues() {
-  if (!chk.checked) return [];
-  return scan(ed.value, ed.selectionStart, entered).filter(function (i) { return !ignored.has(i.token.text); });
-}
 const syllables = new Map(MANUAL_SYLLABLES.map(parts => [voiceKey(parts.join('')), parts]));
 function updateCardFromEditor() {
-  if (!$('t1').classList.contains('on')) return;
+  if ($('p1').hidden) return;
   const caret = ed.selectionStart;
   const tokens = tokenize(ed.value);
   const token = tokens.find(item => item.start <= caret && caret <= item.end);
   const decoded = token && decodeToken(token.text);
   const parts = decoded && syllables.get(voiceKey(token.text));
-  const tone = decoded && Number(decoded.tone || (isStop(decoded.ascii.toLowerCase()) ? 4 : 1));
+  const tone = decoded && Number(decoded.tone || entered.get(token.text) || (isStop(decoded.ascii.toLowerCase()) ? 4 : 1));
   const match = parts && TON.some(entry => entry[0] === tone) && toneOk(decoded.ascii.toLowerCase(), String(tone));
   $('p1').classList.toggle('no-match', !match);
   if (!match) {
@@ -1109,44 +1040,11 @@ function updateCardFromEditor() {
 ed.addEventListener('cardrestore', function () { ed.dataset.matched=''; refresh(); rememberRange(); });
 function refresh() {
   updateCardFromEditor();
-  ed.dataset.matched=$('p1').classList.contains('no-match')?'':'yes';
-  var issues = currentIssues();
-  fixEl.textContent = '';
-  fixEl.hidden = !issues.length;
-  issues.forEach(function (is) {
-    var row = document.createElement('div'); row.className = 'row';
-    var tk = document.createElement('button'); tk.type = 'button'; tk.className = 'tk'; tk.textContent = is.token.text;
-    tk.setAttribute('aria-label', '在輸入框中選取 ' + is.token.text);
-    tk.addEventListener('click', function () { ed.focus(); ed.setSelectionRange(is.token.start, is.token.end); });
-    var why = document.createElement('span'); why.className = 'why'; why.textContent = is.why;
-    row.appendChild(tk); row.appendChild(why);
-    is.cands.forEach(function (c) {
-      var b = document.createElement('button'); b.type = 'button'; b.className = 'c';
-      b.textContent = '→ ' + renderFix(is, c);
-      b.addEventListener('mousedown', function (e) { e.preventDefault(); });
-      b.addEventListener('click', function () { applyCand(is, c, false); refresh(); });
-      row.appendChild(b);
-    });
-    var ig = document.createElement('button'); ig.type = 'button'; ig.className = 'ig'; ig.textContent = '忽略';
-    ig.addEventListener('mousedown', function (e) { e.preventDefault(); });
-    ig.addEventListener('click', function () { ignored.add(is.token.text); refresh(); });
-    row.appendChild(ig);
-    fixEl.appendChild(row);
-  });
-}
-function autoFixBeforeSeparator() {
-  if (!chk.checked) return;
-  var c = ed.selectionStart, v = ed.value;
-  if (c < 2 || /[A-Za-zÀ-ɏ̀-ͯḀ-ỿⁿ\d]/.test(v.charAt(c - 1))) return;
-  var toks = tokenize(v.slice(0, c - 1)), last = toks[toks.length - 1];
-  if (!last || last.end !== c - 1 || ignored.has(last.text)) return;
-  var is = checkToken(last, entered);
-  if (is && is.cands.length === 1) applyCand(is, is.cands[0], true);
+  ed.dataset.matched = $('p1').classList.contains('no-match') ? '' : 'yes';
 }
 function onInput(e) {
   if (!e || !e.inputType || /^insert/.test(e.inputType)) liveSpecial();
   convertAtCaret();
-  if (e && e.inputType === 'insertText' && e.data && /^[\s\-.,;:!?'"()]$/.test(e.data)) autoFixBeforeSeparator();
   refresh();
 }
 // Keep the editor range when a touch, mouse, or keyboard moves focus to a key.
@@ -1164,6 +1062,17 @@ function insert(t) {
   var a = Math.min(editorRange.start, ed.value.length);
   var b = Math.min(editorRange.end, ed.value.length);
   var out = t;
+  if (t === '__clear__') {
+    ed.value = '';
+    entered.clear();
+    clearTimeout(timer);
+    st.textContent = '';
+    ed.focus({ preventScroll: true });
+    ed.setSelectionRange(0, 0);
+    rememberRange();
+    refresh();
+    return;
+  }
   if (t === '__backspace__') {
     out = '';
     if (a === b && a > 0) {
@@ -1218,10 +1127,9 @@ ed.addEventListener('compositionend', function () { liveSpecial(); convertAtCare
 ed.addEventListener('keyup', function (e) { if (/Arrow|Home|End|Page/.test(e.key)) refresh(); });
 ed.addEventListener('click', refresh);
 ed.addEventListener('paste', function () { setTimeout(function () {
-  if (on.checked) { var r = pojText(ed.value, opts()); if (r !== ed.value) { ed.value = r; ed.setSelectionRange(r.length, r.length); } }
+  var r = pojText(ed.value, opts()); if (r !== ed.value) { ed.value = r; ed.setSelectionRange(r.length, r.length); }
   refresh();
 }, 0); });
-[on, chk].forEach(function (x) { x.addEventListener('change', refresh); });
 keyboard.querySelectorAll('[data-insert]').forEach(function (b) {
   b.addEventListener('mousedown', function (e) { e.preventDefault(); });
   b.addEventListener('pointerdown', function (e) {
@@ -1230,16 +1138,16 @@ keyboard.querySelectorAll('[data-insert]').forEach(function (b) {
   });
   b.addEventListener('click', function () { insert(b.getAttribute('data-insert')); });
 });
-// Dismiss all displayed correction messages without changing the editor or settings.
-var clearFixesButton = keyboard.getElementById('clear-fixes');
-clearFixesButton.addEventListener('mousedown', function (e) { e.preventDefault(); });
-clearFixesButton.addEventListener('click', function () {
-  currentIssues().forEach(function (issue) { ignored.add(issue.token.text); });
-  clearTimeout(timer);
-  undoState = null;
-  st.textContent = '';
-  fixEl.textContent = '';
-  fixEl.hidden = true;
+document.querySelectorAll('[data-editor-action]').forEach(function (button) {
+  button.addEventListener('pointerdown', function (event) {
+    if (document.activeElement === ed) rememberRange();
+    event.preventDefault();
+  });
+  button.addEventListener('mousedown', function (event) { event.preventDefault(); });
+  button.addEventListener('click', function () {
+    stopAuto();
+    insert(button.dataset.editorAction);
+  });
 });
 ed.setSelectionRange(ed.value.length, ed.value.length);
 rememberRange();
