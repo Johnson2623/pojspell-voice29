@@ -109,11 +109,23 @@ body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;paddi
 .consonant-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .editor-actions{display:flex;gap:6px}
 .editor-actions button{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:9px;min-height:36px;padding:3px 10px;touch-action:manipulation}
+
+#autoOptions .reduced-row-label{font-size:13.5px;line-height:21.375px}
+#autoOptions :is(#vow,#cod,#ton) button{font-size:18px}
+@media(max-width:600px) and (orientation:portrait){
+ #autoOptions :is(#vow,#cod,#ton) button{font-size:clamp(23.625px,6.3vw,29.25px)}
+}
+
+#manualWord{font-family:"Times New Roman",serif;min-width:0;overflow-wrap:anywhere;white-space:pre-wrap;cursor:default}
+#word[hidden],#manualWord[hidden]{display:none}
+
+#p1.manual-action #sourceHanzi{visibility:hidden}
 </style>
 <style>
 .flashcard-content{padding:4px 6px}
 .word-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-.word-row>#word,.word-row>.source-hanzi{grid-column:auto;grid-row:1}
+.word-row>#word,.word-row>#manualWord{grid-column:1;grid-row:1}
+.word-row>.source-hanzi{grid-column:2;grid-row:1}
 #word{font-family:"Times New Roman",serif;color:var(--fg);width:100%;min-width:0;border:0;background:transparent;text-align:center;padding:0}
 #word:focus-visible{outline:1px solid var(--ac);outline-offset:-2px;border-radius:8px}
 .keyboard-pane[hidden]{display:none}.keyboard-pane{max-width:520px;margin-inline:auto}
@@ -132,7 +144,7 @@ body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;paddi
 <section id="dictionaryPanel" hidden aria-label="辭庫"><iframe id="dictionaryFrame" title="辭庫1999" allow="autoplay" style="display:block;width:100%;height:calc(100dvh - 60px);min-height:360px;border:0;border-radius:12px"></iframe></section>
 <div id="p1">
   <div class="out">
-    <div class="word-row"><input class="word" id="word" lang="nan-Latn" aria-label="白話字輸入框" placeholder="輸入白話字" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"><div class="word source-hanzi" id="sourceHanzi" aria-label="例音中文">巴</div></div>
+    <div class="word-row"><input class="word" id="word" lang="nan-Latn" aria-label="白話字輸入框" placeholder="輸入白話字" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"><span id="manualWord" class="word" lang="nan-Latn" aria-label="白話字" hidden></span><div class="word source-hanzi" id="sourceHanzi" aria-label="例音中文">巴</div></div>
     <div class="tone-diagrams">
       <svg id="svg" viewBox="0 0 300 73" aria-label="第 1 聲變音前聲調符號：空白"><text class="base-tone-label" x="78.6666666667" y="37.5" text-anchor="end" dominant-baseline="middle" fill="var(--mut)">本音</text><line x1="106.6666666667" x2="193.3333333333" y1="63" y2="63" stroke="var(--line)"/><text x="90.6666666667" y="67" font-size="10" fill="var(--mut)">1</text><line x1="106.6666666667" x2="193.3333333333" y1="54.5" y2="54.5" stroke="var(--line)"/><text x="90.6666666667" y="58.5" font-size="10" fill="var(--mut)">2</text><line x1="106.6666666667" x2="193.3333333333" y1="37.5" y2="37.5" stroke="var(--line)"/><text x="90.6666666667" y="41.5" font-size="10" fill="var(--mut)">3</text><line x1="106.6666666667" x2="193.3333333333" y1="20.5" y2="20.5" stroke="var(--line)"/><text x="90.6666666667" y="24.5" font-size="10" fill="var(--mut)">4</text><line x1="106.6666666667" x2="193.3333333333" y1="12" y2="12" stroke="var(--line)"/><text x="90.6666666667" y="16" font-size="10" fill="var(--mut)">5</text></svg>
       <svg id="sandhiSvg" viewBox="0 0 300 73" aria-label="第 1 聲 → 第 7 聲變調後音調符號" data-target-tone="7"><text class="base-tone-label" x="221.3333333333" y="37.5" text-anchor="start" dominant-baseline="middle" fill="var(--mut)">變音</text><line x1="106.6666666667" x2="193.3333333333" y1="63" y2="63" stroke="var(--line)"/><text x="90.6666666667" y="67" font-size="10" fill="var(--mut)">1</text><line x1="106.6666666667" x2="193.3333333333" y1="54.5" y2="54.5" stroke="var(--line)"/><text x="90.6666666667" y="58.5" font-size="10" fill="var(--mut)">2</text><line x1="106.6666666667" x2="193.3333333333" y1="37.5" y2="37.5" stroke="var(--line)"/><text x="90.6666666667" y="41.5" font-size="10" fill="var(--mut)">3</text><line x1="106.6666666667" x2="193.3333333333" y1="20.5" y2="20.5" stroke="var(--line)"/><text x="90.6666666667" y="24.5" font-size="10" fill="var(--mut)">4</text><line x1="106.6666666667" x2="193.3333333333" y1="12" y2="12" stroke="var(--line)"/><text x="90.6666666667" y="16" font-size="10" fill="var(--mut)">5</text><path id="sandhiToneSymbol" d="M 125.53030303030303 37.5 L 174.46969696969697 37.5" fill="none" stroke="var(--ac)" stroke-width="3.090909090909091" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -148,9 +160,9 @@ body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;paddi
   </div>
   <section id="autoOptions" aria-label="拼音組合選項" hidden>
   <div class="lab consonant-heading"><span>子音</span><span class="editor-actions"><button type="button" data-editor-action="__backspace__" aria-label="退格，刪除游標前的字元">⌫ 退格</button><button type="button" data-editor-action="__clear__" aria-label="清除輸入欄位全部內容">清除</button></span></div><div class="row" id="ini"><button data-v="">∅</button><button data-v="p" class="on">p</button><button data-v="ph">ph</button><button data-v="b">b</button><button data-v="m">m</button><button data-v="t">t</button><button data-v="th">th</button><button data-v="n">n</button><button data-v="l">l</button><button data-v="k">k</button><button data-v="kh">kh</button><button data-v="g">g</button><button data-v="ng">ng</button><button data-v="h">h</button><button data-v="ch">ch</button><button data-v="chh">chh</button><button data-v="s">s</button><button data-v="j">j</button></div>
-  <div class="lab">母音</div><div class="row" id="vow"><button data-v="a" class="on">a</button><button data-v="e">e</button><button data-v="i">i</button><button data-v="o">o</button><button data-v="o͘">o͘</button><button data-v="u">u</button><button data-v="ai">ai</button><button data-v="au">au</button><button data-v="ia">ia</button><button data-v="io">io</button><button data-v="iu">iu</button><button data-v="oa">oa</button><button data-v="oe">oe</button><button data-v="o͘e">o͘e</button><button data-v="ui">ui</button><button data-v="iau">iau</button><button data-v="oai">oai</button></div>
-  <div class="lab">鼻母音 / 斷音</div><div class="row" id="cod"><button data-v="" class="on">∅</button><button data-v="ⁿ">ⁿ</button><button data-v="m">m</button><button data-v="n">n</button><button data-v="ng">ng</button><button data-v="p">p</button><button data-v="t">t</button><button data-v="k">k</button><button data-v="h">h</button></div>
-  <div class="lab">聲調(斷音韻尾才能選第 4、8 聲)</div><div class="row" id="ton"><button data-v="1" class="on">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4" disabled>4</button><button data-v="5">5</button><button data-v="7">7</button><button data-v="8" disabled>8</button></div>
+  <div class="lab reduced-row-label">母音</div><div class="row" id="vow"><button data-v="a" class="on">a</button><button data-v="e">e</button><button data-v="i">i</button><button data-v="o">o</button><button data-v="o͘">o͘</button><button data-v="u">u</button><button data-v="ai">ai</button><button data-v="au">au</button><button data-v="ia">ia</button><button data-v="io">io</button><button data-v="iu">iu</button><button data-v="oa">oa</button><button data-v="oe">oe</button><button data-v="o͘e">o͘e</button><button data-v="ui">ui</button><button data-v="iau">iau</button><button data-v="oai">oai</button></div>
+  <div class="lab reduced-row-label">鼻母音 / 斷音</div><div class="row" id="cod"><button data-v="" class="on">∅</button><button data-v="ⁿ">ⁿ</button><button data-v="m">m</button><button data-v="n">n</button><button data-v="ng">ng</button><button data-v="p">p</button><button data-v="t">t</button><button data-v="k">k</button><button data-v="h">h</button></div>
+  <div class="lab reduced-row-label">聲調(斷音韻尾才能選第 4、8 聲)</div><div class="row" id="ton"><button data-v="1" class="on">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4" disabled>4</button><button data-v="5">5</button><button data-v="7">7</button><button data-v="8" disabled>8</button></div>
   </section>
 </div>
 
@@ -321,6 +333,8 @@ function render(){
   if(!stop&&[4,8].includes(s.t))s.t=1;
   if(s.c==='ⁿ'&&false)s.c='';
   $('word').value=spell().normalize('NFC');
+  $('manualWord').textContent=$('word').value;
+  $('p1').classList.remove('manual-action');
   if (!$('autoOptions').hidden) {
     for (const [id, value] of [['ini',s.i],['vow',s.v],['cod',s.c],['ton',s.t]]) {
       for (const button of $(id).children) {
@@ -354,9 +368,11 @@ const show=n=>{
  if ($('tB').classList.contains('on')) bSelection={...s};
  $('tB').classList.toggle('on',n===2);
  $('word').readOnly=n!==1;
+ $('word').hidden=n===2;
+ $('manualWord').hidden=n!==2;
  $('keyboard').hidden=n!==1;
  $('autoOptions').hidden=n!==3 && n!==2;
- $('p1').classList.remove('no-match');
+ $('p1').classList.remove('no-match','manual-action');
  stopAuto();
  const dictionary=n===4,frame=$('dictionaryFrame');
  $('p1').hidden=dictionary;$('dictionaryPanel').hidden=!dictionary;
@@ -750,7 +766,7 @@ td.o{font-size:19px;color:var(--ac)}
       <div class="spec" id="spec" aria-label="特殊符號與編輯鍵"><button type="button" data-insert="o͘" aria-label="輸入 o͘，打oo也可"><span class="k">打oo也可</span><span class="g">o͘</span></button><button type="button" data-insert="ⁿ" aria-label="輸入 ⁿ，打nn也可"><span class="k">打nn也可</span><span class="g">ⁿ</span></button><button type="button" data-insert="__clear__" aria-label="清除全部輸入內容"><span class="g">清除</span></button></div>
     </section>
     <noscript><p role="alert">目前是附件預覽，按鍵無法執行。請開啟線上操作版，或將檔案放到可執行 JavaScript 的網頁主機。</p></noscript>
-    <div class="keyboard-head"><h2>聲調與特殊符號鍵盤</h2><span>先輸入字母，再按聲調</span></div>
+    <div class="keyboard-head"><h2>聲調與特殊符號鍵盤</h2><span style="white-space:pre-wrap">先輸入字母，再按聲調, o͘  和 ⁿ 是字母</span></div>
     <span class="status" id="st" role="status"></span>
   </section>
 
@@ -1040,7 +1056,11 @@ function updateCardFromEditor() {
 }
 ed.addEventListener('cardrestore', function () { ed.dataset.matched=''; refresh(); rememberRange(); });
 function refresh() {
+  const manualA = $('tB').classList.contains('on');
+  ed.hidden = manualA;
+  $('manualWord').hidden = !manualA;
   updateCardFromEditor();
+  $('manualWord').textContent=ed.value;
   ed.dataset.matched = $('p1').classList.contains('no-match') ? '' : 'yes';
 }
 function onInput(e) {
@@ -1059,6 +1079,25 @@ function rememberRange() {
 document.addEventListener('selectionchange', function () {
   if (document.activeElement === ed) rememberRange();
 });
+function previousLetterStart(text, end) {
+  const prefix = text.slice(0, end);
+  if (!prefix) return 0;
+  if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+    const letters = new Intl.Segmenter('nan', { granularity: 'grapheme' }).segment(prefix);
+    return letters.containing(end - 1).index;
+  }
+  let start = end - 1;
+  while (start > 0 && /[\u0300-\u036f]/.test(text[start])) start--;
+  return start;
+}
+function editManualCard(action) {
+  const displayed = $('manualWord').textContent;
+  const end = action === '__clear__' ? 0 : previousLetterStart(displayed, displayed.length);
+  ed.value = displayed.slice(0, end);
+  $('manualWord').textContent = ed.value;
+  $('p1').classList.add('manual-action');
+  // The flashcard and its audio still belong to the selected combination.
+}
 function insert(t) {
   var a = Math.min(editorRange.start, ed.value.length);
   var b = Math.min(editorRange.end, ed.value.length);
@@ -1068,7 +1107,7 @@ function insert(t) {
     entered.clear();
     clearTimeout(timer);
     st.textContent = '';
-    ed.focus({ preventScroll: true });
+    if (!ed.hidden && !ed.readOnly) ed.focus({ preventScroll: true });
     ed.setSelectionRange(0, 0);
     rememberRange();
     refresh();
@@ -1077,14 +1116,7 @@ function insert(t) {
   if (t === '__backspace__') {
     out = '';
     if (a === b && a > 0) {
-      var prefix = ed.value.slice(0, a);
-      if (typeof Intl !== 'undefined' && Intl.Segmenter) {
-        var segments = Array.from(new Intl.Segmenter('nan', { granularity: 'grapheme' }).segment(prefix));
-        a = segments[segments.length - 1].index;
-      } else {
-        a--;
-        while (a > 0 && /[\u0300-\u036f]/.test(ed.value[a])) a--;
-      }
+      a = previousLetterStart(ed.value, a);
     }
   }
   // A dot key after an existing o adds the dot to that letter.
@@ -1118,7 +1150,7 @@ function insert(t) {
     record(out, t);
   }
   ed.value = ed.value.slice(0, a) + out + ed.value.slice(b);
-  ed.focus({ preventScroll: true });
+  if (!ed.hidden && !ed.readOnly) ed.focus({ preventScroll: true });
   ed.setSelectionRange(a + out.length, a + out.length);
   rememberRange();
   refresh();
@@ -1147,7 +1179,8 @@ document.querySelectorAll('[data-editor-action]').forEach(function (button) {
   button.addEventListener('mousedown', function (event) { event.preventDefault(); });
   button.addEventListener('click', function () {
     stopAuto();
-    insert(button.dataset.editorAction);
+    if ($('tB').classList.contains('on')) editManualCard(button.dataset.editorAction);
+    else insert(button.dataset.editorAction);
   });
 });
 ed.setSelectionRange(ed.value.length, ed.value.length);
