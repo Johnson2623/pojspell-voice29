@@ -126,7 +126,7 @@ body{display:block;width:100%;max-width:none;height:auto;min-height:100dvh;paddi
 </style></head>
 <body>
 <section class="flashcard-pane" aria-label="白話字拼讀寫閃卡練習器"><div class="flashcard-content">
-<div class="tabs"><button id="t1" class="on">手動A</button><button id="tB">手動B</button><button id="tAuto">自動拼音</button><label class="speed-control">速度 <select id="autoSpeed" disabled><option value="3" selected>3 秒</option><option value="5">5 秒</option><option value="7">7 秒</option><option value="10">10 秒</option></select></label><button id="tDictionary">辭庫</button></div>
+<div class="tabs"><button id="tB">手動A</button><button id="t1" class="on">手動B</button><button id="tAuto">自動拼音</button><label class="speed-control">速度 <select id="autoSpeed" disabled><option value="3" selected>3 秒</option><option value="5">5 秒</option><option value="7">7 秒</option><option value="10">10 秒</option></select></label><button id="tDictionary">辭庫</button></div>
 
 
 <section id="dictionaryPanel" hidden aria-label="辭庫"><iframe id="dictionaryFrame" title="辭庫1999" allow="autoplay" style="display:block;width:100%;height:calc(100dvh - 60px);min-height:360px;border:0;border-radius:12px"></iframe></section>
@@ -716,6 +716,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-off
 .keys .g{font-size:28px;line-height:1.35}
 .spec button{gap:6px}
 .spec .g{font-size:24px;line-height:1.2}
+.spec [data-insert="o͘"] .g,.spec [data-insert="ⁿ"] .g{font-size:36px}
 .spec .k{font-size:12px}
 .status:empty{display:none}
 .opts{border-top:1px solid var(--line);padding-top:6px;gap:2px 12px}
@@ -749,7 +750,7 @@ td.o{font-size:19px;color:var(--ac)}
       <div class="spec" id="spec" aria-label="特殊符號與編輯鍵"><button type="button" data-insert="o͘" aria-label="輸入 o͘，打oo也可"><span class="k">打oo也可</span><span class="g">o͘</span></button><button type="button" data-insert="ⁿ" aria-label="輸入 ⁿ，打nn也可"><span class="k">打nn也可</span><span class="g">ⁿ</span></button><button type="button" data-insert="__clear__" aria-label="清除全部輸入內容"><span class="g">清除</span></button></div>
     </section>
     <noscript><p role="alert">目前是附件預覽，按鍵無法執行。請開啟線上操作版，或將檔案放到可執行 JavaScript 的網頁主機。</p></noscript>
-    <div class="keyboard-head"><h2>② 聲調與特殊符號鍵盤</h2><span>先輸入字母，再按聲調</span></div>
+    <div class="keyboard-head"><h2>聲調與特殊符號鍵盤</h2><span>先輸入字母，再按聲調</span></div>
     <span class="status" id="st" role="status"></span>
   </section>
 
